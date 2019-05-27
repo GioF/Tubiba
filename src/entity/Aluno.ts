@@ -8,7 +8,7 @@ export class Aluno {
     id: number;
 
     @Column()
-    matricula: number;
+    Matricula: number;
 
     @Column({length: 100})
     nome: string;
@@ -17,7 +17,7 @@ export class Aluno {
     sobrenome: string;
 
     @Column({type: "smallint"})
-    ano: number;
+    Ano: number;
 
     @Column({length: 1})
     Sala: string;

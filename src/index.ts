@@ -1,21 +1,24 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
-import {User} from "./entity/User";
+import {Aluno} from "./entity/Aluno";
+import {getAlunoBy} from "./repository/getAluno";
+import {save} from "./repository/saveEntity";
 
-createConnection().then(async connection => {
+createConnection().then(async connection =>{
+    console.log("Servidor iniciado com sucesso...");
+    console.log("Tentando inserir um novo aluno no banco de dados");
+    let aluno= new Aluno();
+    aluno.nome = "Birita";
+    aluno.sobrenome = "Tubiba";
+    aluno.Cpf = "666.666.666-24";
+    aluno.Sala = "B";
+    aluno.Unidade = "Mec";
+    aluno.Matricula = 234;
+    aluno.Ano = 3;
 
-    console.log("Inserting a new user into the database...");
-    const user = new User();
-    user.firstName = "Timber";
-    user.lastName = "Saw";
-    user.age = 25;
-    await connection.manager.save(user);
-    console.log("Saved a new user with id: " + user.id);
-
-    console.log("Loading users from the database...");
-    const users = await connection.manager.find(User);
-    console.log("Loaded users: ", users);
-
-    console.log("Here you can setup and run express/koa/any other framework.");
+    await save.aluno(aluno);
+    console.log("Salvo aluno com id " + aluno.id);
+    console.log("this is a test");
 
 }).catch(error => console.log(error));
+
