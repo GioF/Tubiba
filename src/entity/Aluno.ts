@@ -7,7 +7,7 @@ export class Aluno {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({default: 0})
     Matricula: number;
 
     @Column({length: 100})

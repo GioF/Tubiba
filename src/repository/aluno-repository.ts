@@ -1,25 +1,33 @@
 import {getManager} from "typeorm";
 import {Aluno} from "../entity/Aluno";
 
-export class getAlunoBy{
+export class alunoRepo{
 
-    id(_id: number[]){
+    static save(entidade: Aluno){
+        return getManager().getRepository(Aluno).save(entidade);
+    }
+
+    static getAll(){
+        return getManager().getRepository(Aluno).find();
+    }
+
+    static getById(_id: number[]){
         return getManager().getRepository(Aluno).findByIds(_id);
     }
 
-    name(_nome: string){
+    static getByName(_nome: string){
         return getManager().getRepository(Aluno).findOne({nome: _nome});
     }
 
-    matricula(_matricula: number){
+    static getByMatricula(_matricula: number){
         return getManager().getRepository(Aluno).findOne({Matricula: _matricula});
     }
 
-    cpf(_cpf: string){
+    static getByCPF(_cpf: string){
         return getManager().getRepository(Aluno).findOne({Cpf: _cpf})
     }
 
-    nota(_id: number){
+    static getFromNota(_id: number){
 
         const queryOptions = {
             relations: ["aluno"],
@@ -29,5 +37,13 @@ export class getAlunoBy{
         }
 
         return getManager().getRepository(Aluno).findOne(queryOptions);
+    }
+
+    static delete(_id: number){
+        return getManager().createQueryBuilder()
+        .delete()
+        .from(Aluno)
+        .where("id = :id", {id: _id})
+        .execute();
     }
 }
