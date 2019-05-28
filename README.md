@@ -9,7 +9,7 @@ TODO: adicionar endpoint que anuncia o preço médio do maço de black num raio 
 3. Clonar o repositório
 5. Criar um banco de dados MySQL (não faça nenhuma tabela, o typeORM já vai fazer isso pra você, só segue a lista)
 4. Criar um arquivo .env na pasta raiz do projeto
-5. Popular ele com os dados necessários pra acessar o banco de dados (exemplo de um arquivo .env abaixo)
+5. Popular ele com os dados necessários pra acessar o banco de dados (exemplo de um arquivo .env na pasta raiz do projeto)
 6. Após o acima ser feito, digitar npm start
 
 Recomendo usar o [POSTMAN](https://www.getpostman.com/downloads/) pra testar os endpoints da API.
@@ -21,13 +21,7 @@ Dá uma checada em como o git funciona antes, abre uma branch sempre que for edi
 
 TODO: fazer a documentação da API
 
-## Exemplo de arquivo .env
-DB_HOST = localhost
-DB_PORT = 3306
-DB_USER = root
-DB_PASS = xurumelos123
-DB_NAME = proibido
-
-Com essas configurações, o servidor vai tentar se conectar no banco de dados de nome proibido no localhost pela porta 3306, usando o usuário root e a senha xurumelos123
+## .ENV
+Com as configurações usadas no .env de exemplo, o servidor vai tentar se conectar no banco de dados de nome proibido no localhost pela porta 3306, usando o usuário root e a senha xurumelos123
 
 TODO: adicionar um socket pra jogar truco online no server
