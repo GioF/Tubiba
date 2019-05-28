@@ -1,10 +1,13 @@
 import "reflect-metadata";
 import {createConnection} from "typeorm";
 import * as express from "express";
-import {alunoRouter} from "./routes/alunoRouter";
-import {logger} from "./routes/index";
+import {alunoRouter} from "../routes/alunoRouter";
+import {logger} from "../routes/index";
 
-createConnection().then(async connection =>{
+const config = require('./config');
+console.log(config);
+
+createConnection(config).then(async connection =>{
     
     const app = express();
     app.set("port", process.env.port || 3000);
