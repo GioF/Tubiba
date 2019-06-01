@@ -2,6 +2,7 @@ import "reflect-metadata";
 import {createConnection} from "typeorm";
 import * as express from "express";
 import {alunoRouter} from "../routes/alunoRouter";
+import {materiaRouter} from "../routes/materiaRouter";
 import {logger} from "../routes/index";
 
 const config = require('./config');
@@ -18,6 +19,7 @@ createConnection(config).then(async connection =>{
 
     app.use('/', logger);
     app.use('/aluno', alunoRouter);
+    app.use('/materia', materiaRouter);
 
 }).catch(error => console.log(error));
 
