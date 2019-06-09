@@ -20,5 +20,5 @@ export function getMateriaById(req, res, next){
 }
 
 export function deleteMateria(req, res, next){
-    materiaRepo.delete(req.params.alunoId).then(() => res.send("Sucesso"));
+    materiaRepo.delete(req.params.materiaId).then(() => res.send("Sucesso"));
 }
