@@ -1,6 +1,6 @@
 # Tubiba, gerenciando notas desde (tomara que) Dezembro de 2019
 
-TODO: adicionar endpoint que anuncia o preço médio do maço de black num raio de 2 km
+TODO: Guidelines
 
 
 ## Passos pra iniciar o servidor:
