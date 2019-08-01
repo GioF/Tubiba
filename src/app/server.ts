@@ -6,9 +6,8 @@ import {materiaRouter} from "../routes/materiaRouter";
 import {logger} from "../routes/index";
 
 const config = require('./config');
-console.log(config);
 
-createConnection(config).then(async connection =>{
+createConnection(config).then(async () =>{
     
     const app = express();
     app.set("port", process.env.port || 3000);

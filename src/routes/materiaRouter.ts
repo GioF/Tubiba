@@ -8,6 +8,6 @@ materiaRouter.use(urlencoded({extended: true}));
 materiaRouter.get("/", materiaController.getMaterias);
 materiaRouter.get('/:materiaId', materiaController.getMateriaById);
 materiaRouter.post('/', materiaController.createMateria);
-materiaRouter.delete('/:alunoId', materiaController.deleteMateria);
+materiaRouter.delete('/:materiaId', materiaController.deleteMateria);
 
 export {materiaRouter};

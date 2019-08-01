@@ -13,17 +13,18 @@ export class Nota {
     aluno: Aluno;
 
     @ManyToOne(type => Materia, materia => materia.notas)
+    @JoinColumn({name: "materiaId"})
     materia: Materia;
 
-    @Column()
+    @Column({default: 0})
     prova: number;
 
-    @Column()
+    @Column({default: 0})
     simulado: number;
 
-    @Column()
+    @Column({default: 0})
     trabalhos: number;
 
-    @Column()
+    @Column({default: 0})
     total: number;
 }
