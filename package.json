@@ -1,6 +1,9 @@
 {
    "name": "FeiraBacknd",
    "version": "0.0.1",
+   "engines":{
+   "node": "10.15.2"
+   }
    "description": "API de notas do projeto da feira",
    "devDependencies": {
       "@types/morgan": "^1.7.35",
