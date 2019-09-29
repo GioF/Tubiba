@@ -20,6 +20,8 @@
       "typeorm": "^0.2.16"
    },
    "scripts": {
-      "start": "node build/app/server.js"
+      "start": "node build/app/server.js",
+      "build": "tsc",
+      "postinstall": "npm run build"
    }
 }
