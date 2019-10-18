@@ -8,7 +8,7 @@ const ClassSchema = new mongoose.Schema({
     subject: String,
     exercises: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ExerciseList'
+        ref: 'Assignment'
     }]
 })
 
