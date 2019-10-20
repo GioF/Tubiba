@@ -20,7 +20,7 @@ module.exports = {
             assignments = await Class.findById(classId).populate('exercises').then(data => data.exercises);
         }
 
-        return assignments;
+        return res.json(assignments);
     },
 
     async store(req, res){
