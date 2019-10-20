@@ -8,14 +8,14 @@ module.exports = {
 
         const { showAll } = req.query;
 
-        const { userId } = req.headers;
+        const { userid } = req.headers;
 
-        const user = await User.findById(userId);
+        const user = await User.findById(userid);
 
         const assignments = null;
 
         if(user.type=='student' && showAll==false){
-            assignments = await Assignment.find({ remaining: userId});
+            assignments = await Assignment.find({ remaining: userid});
         } else {
             assignments = await Class.findById(classId).populate('exercises').then(data => data.exercises);
         }
@@ -23,14 +23,16 @@ module.exports = {
         return res.json(assignments);
     },
 
-    async store(req, res){
-        const { userId } = req.headers;
+    async store(req, res){                                          //TODO: refatorar essa função
+        const { userid } = req.headers;
 
         const { classId } = req.params;
 
-        const classroom = Class.findById(classId);
+        classroom = await Class.findById(classId);
+        
+        const user = User.findById(userid);
 
-        if(userId && classroom.teacher==userId){
+        if(user && classroom.teacher.equals(userid)){
             const {
                 trimester,
                 title,
@@ -41,7 +43,7 @@ module.exports = {
                 type,
             } = req.body;
 
-            return res.json(await Assignment.create({
+            const assignment = await Assignment.create({
                 trimester, 
                 title, 
                 question,
@@ -50,7 +52,15 @@ module.exports = {
                 date,
                 type,
             })
-            );
+
+            Class.findOneAndUpdate({_id: classId}, {$push: assignment});
+
+            return res.json(assignment);
+            
+        } else {
+            return res.json({
+                TODO: "adicionar mensagens de erro"
+            });
         }
     }
 

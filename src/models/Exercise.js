@@ -18,7 +18,7 @@ const AssignmentSchema = new mongoose.Schema({
     question: String,
     options: [String],
     correctAnswer: Number,
-    date: Date,
+    date: String,
     type: String,
     remaining: [{
         type: mongoose.Schema.Types.ObjectId,

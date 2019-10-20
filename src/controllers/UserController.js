@@ -2,7 +2,7 @@ const User = require('../models/User');
 
 module.exports = {
     async store (req, res){
-        let aluno = new Aluno();
+        console.log(req.body);
         const {
             username,
             email,
@@ -10,6 +10,8 @@ module.exports = {
             type } = req.body;
 
         let user = await User.findOne({email});
+        
+        //TODO: salvar senhas em hash e não plaintext
 
         if(!user){
             user = await User.create({
@@ -20,10 +22,7 @@ module.exports = {
             })
         }
 
-        return res.json(user);
+        return res.json(user._id);
     }
-
-
-
 
 };
