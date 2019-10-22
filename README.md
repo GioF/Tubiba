@@ -18,4 +18,6 @@ Recomendo usar o [POSTMAN](https://www.getpostman.com/downloads/) pra testar os 
 TODO: fazer a documentação da API
 
 ## .ENV
-insira a connection string como valor da variável MONGOURL.
+Um exemplo de .env é um simples arquivo nomeado .env na pasta raiz do servidor, com a variável MONGOURL tendo o valor da connection string atribuida a ela.
+
+>MONGOURL = "SUA CONNECTION STRING AQUI"
