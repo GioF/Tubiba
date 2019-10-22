@@ -3,36 +3,59 @@ const User = require('../models/User');
 const Class = require('../models/Class');
 
 module.exports = {
-    async index(req, res){
-        const { classId } = req.params;
+    async index(req, res) {
+        const {
+            classId
+        } = req.params;
 
-        const { showAll } = req.query;
+        //const {showAll} = req.query;
 
-        const { userid } = req.headers;
+        const {
+            userid
+        } = req.headers;
 
         const user = await User.findById(userid);
 
-        const assignments = null;
+        const classroom = await Class.findById(classId);
 
-        if(user.type=='student' && showAll==false){
-            assignments = await Assignment.find({ remaining: userid});
+        if (user && user.type == 'student') {                                   //TODO: logic to return only undone assignments
+            classroom.populate('exercises')                                     //if user wishes to
+                .execPopulate()
+                .then(data => {
+                    return res.json(data.exercises)
+                })
+                .catch(console.log);
+
+        } else
+        if (user && classroom.teacher.equals(userid)) {
+            classroom.populate('exercises')
+                .execPopulate()
+                .then(data => {
+                    return (res.json(data.exercises))
+                })
+                .catch(console.log);
         } else {
-            assignments = await Class.findById(classId).populate('exercises').then(data => data.exercises);
+            return res.status(400).json({
+                error: "Unauthorized user"
+            });
         }
-
-        return res.json(assignments);
     },
 
-    async store(req, res){                                          //TODO: refatorar essa função
-        const { userid } = req.headers;
+    async store(req, res) {                                                     //TODO: refactor this function for clarity
+        const {
+            userid
+        } = req.headers;
 
-        const { classId } = req.params;
+        const {
+            classId
+        } = req.params;
 
-        classroom = await Class.findById(classId);
-        
+        classroom = await Class.findById(classId).populate('exercises');
+
         const user = User.findById(userid);
 
-        if(user && classroom.teacher.equals(userid)){
+        if (user && classroom.teacher.equals(userid)) {
+
             const {
                 trimester,
                 title,
@@ -44,8 +67,8 @@ module.exports = {
             } = req.body;
 
             const assignment = await Assignment.create({
-                trimester, 
-                title, 
+                trimester,
+                title,
                 question,
                 options,
                 correctAnswer,
@@ -53,13 +76,21 @@ module.exports = {
                 type,
             })
 
-            Class.findOneAndUpdate({_id: classId}, {$push: assignment});
+            //add assignment to class list of exercises
+
+            Class.updateOne({
+                "_id": classId
+            }, {
+                "$push": {
+                    "exercises": assignment._id
+                }
+            }).catch(error => console.log("TODO: adicionar mensagens de erro" + error));
 
             return res.json(assignment);
-            
+
         } else {
-            return res.json({
-                TODO: "adicionar mensagens de erro"
+            return res.status(400).json({
+                error: "Unauthorized user"
             });
         }
     }
