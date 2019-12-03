@@ -8,8 +8,7 @@ const CompletedAssignmentSchema = new mongoose.Schema({
     answer: Number,
     justificative: String,
     observation: String,
-    verified: Boolean,
-    grade: Number
+    verified: Boolean
 })
 
 const AssignmentSchema = new mongoose.Schema({
@@ -19,11 +18,7 @@ const AssignmentSchema = new mongoose.Schema({
     options: [String],
     correctAnswer: Number,
     date: String,
-    type: String,
-    remaining: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }],
+    type: [String],
     class: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Class'

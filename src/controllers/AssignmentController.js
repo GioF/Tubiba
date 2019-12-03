@@ -32,7 +32,6 @@ module.exports = {
         if(user && classroom.teacher==user){                                        //checks if the user is the class teacher
             const {
                 observation,
-                grade,
                 studentId
             } = req.body;
 
@@ -58,8 +57,7 @@ module.exports = {
                 answer,
                 justificative,
                 observation: null,
-                verified: false,
-                grade: null
+                verified: false
             };
 
             assignment.completedAssignments.push(completedAssignment);
