@@ -39,11 +39,30 @@ module.exports = {
     },
 
     async show(req, res){
-        const { id } = req.params;
+        const { _id } = req.params;
 
         const classroom = await ClassRoom.findById(id).populate('exercises');
 
         return res.json(classroom);
+    },
+
+    async add(req, res){
+        const {_id} = req.headers;
+        const { number } = req.body;
+
+        const classroom = await ClassRoom.find({number});
+
+        const user = await User.findById(_id);
+
+        User.updateOne({
+            "_id": _id
+        }, {
+            "$push": {
+                "classes": classroom
+            }
+        }).catch(error => console.log("TODO: adicionar mensagens de erro" + error));
+        return res.json(user);
+
     }
 
 }

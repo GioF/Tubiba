@@ -15,6 +15,7 @@ routes.post('/user/login', UserController.select);
 routes.post('/classes', ClassController.store);
 routes.get('/classes', ClassController.index);
 routes.get('/classes/:id', ClassController.show);
+routes.post('/classes/append', ClassController.add);
 
 routes.post('/classes/:classId/assignments', ExerciseController.store);
 routes.get('/classes/:classId/assignments', ExerciseController.index);

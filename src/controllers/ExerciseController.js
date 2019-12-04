@@ -7,14 +7,12 @@ module.exports = {
         const {
             classId
         } = req.params;
-
-        //const {showAll} = req.query;
         
         const {
-            userid
+            _id
         } = req.headers;
 
-        const user = await User.findById(userid);
+        const user = await User.findById(_id);
 
         const classroom = await Class.findById(classId);
 
@@ -27,7 +25,7 @@ module.exports = {
                 .catch(console.log);
 
         } else
-        if (user && classroom.teacher.equals(userid)) {
+        if (user && classroom.teacher.equals(_id)) {
             classroom.populate('exercises')
                 .execPopulate()
                 .then(data => {
