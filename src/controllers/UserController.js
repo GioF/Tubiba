@@ -22,18 +22,31 @@ module.exports = {
             })
         }
 
-        return res.json(user._id);
+        return res.json(user);
     },
 
-    async index (req, res){
-        const {
-            userid
-        } = req.headers;
+    async type (req, res){
+        const { _id } = req.headers;
 
-        let user = await User.findById(userid);
+        let user = await User.findById(_id);
 
         return res.json(user.type);
 
-    }
+    },
 
+    async select (req, res){
+        const _email = req.body.email;
+        const _password = req.body.password;
+
+        let user = await User.findOne({email: _email, password: _password});
+
+        console.log(user);
+        
+        if(user){
+            return res.json(user._id);
+        }else{
+            return res.json(null);
+        }
+    }
+    
 };

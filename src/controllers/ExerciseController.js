@@ -43,7 +43,7 @@ module.exports = {
 
     async store(req, res) {                                                     //TODO: refactor this function for clarity
         const {
-            userid
+            _id
         } = req.headers;
 
         const {
@@ -52,27 +52,23 @@ module.exports = {
 
         classroom = await Class.findById(classId).populate('exercises');
 
-        const user = User.findById(userid);
+        const user = User.findById(_id);
 
-        if (user && classroom.teacher.equals(userid)) {
+        if (user && classroom.teacher.equals(_id)) {
 
             const {
-                trimester,
                 title,
                 question,
                 options,
                 correctAnswer,
-                date,
                 type,
             } = req.body;
 
             const assignment = await Assignment.create({
-                trimester,
                 title,
                 question,
                 options,
                 correctAnswer,
-                date,
                 type,
             })
 
@@ -85,7 +81,6 @@ module.exports = {
                     "exercises": assignment._id
                 }
             }).catch(error => console.log("TODO: adicionar mensagens de erro" + error));
-
             return res.json(assignment);
 
         } else {

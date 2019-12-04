@@ -9,9 +9,12 @@ const AssignmentController = require('./controllers/AssignmentController');
 const routes = express.Router();
 
 routes.post('/user', UserController.store);
-routes.get('/user', UserController.index);
+routes.get('/user', UserController.type);
+routes.post('/user/login', UserController.select);
 
 routes.post('/classes', ClassController.store);
+routes.get('/classes', ClassController.index);
+routes.get('/classes/:id', ClassController.show);
 
 routes.post('/classes/:classId/assignments', ExerciseController.store);
 routes.get('/classes/:classId/assignments', ExerciseController.index);
