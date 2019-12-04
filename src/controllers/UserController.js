@@ -23,6 +23,17 @@ module.exports = {
         }
 
         return res.json(user._id);
+    },
+
+    async index (req, res){
+        const {
+            userid
+        } = req.headers;
+
+        let user = await User.findById(userid);
+
+        return res.json(user.type);
+
     }
 
 };
